@@ -57,7 +57,15 @@ class TestVC: UIViewController {
         self.dataSource = ArrayDataSource<DataType, ItemType, CellAttributeCell>.init(collectionView: collectionView, sectionData: [section])
         collectionView.frame = view.bounds
         view.addSubview(collectionView)
-        
+        dataSource?.updateMinimumLineSpacingForSection({ (section) -> CGFloat in
+            return 40.0
+        }).updateInsetForSection({ (sec) -> UIEdgeInsets in
+            return UIEdgeInsets(top: 15.0, left: 0.0, bottom: 10, right: 30.0)
+        })
+        dataSource?.minimumLineSpacingForSection = {
+            section in
+            return 30.0
+        }
         dataSource?.selectedCompletion = {
             indexPath, item, cell in
             print("selected: \(indexPath)")
